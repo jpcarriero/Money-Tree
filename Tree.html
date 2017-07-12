@@ -22,6 +22,241 @@
 	
 
 <script type="text/javascript">
+var integrations = {
+	  "JackDB":"integration-jackdb",
+	  "Attribution":"integration-attribution",
+	  "Facebook Custom Audiences":"integration-facebook-custom-audiences",
+	  "Mode":"integration-mode",
+	  "Chartio":"integration-chartio",
+	  "Development":"integration-development",
+	  "Bronto":"integration-bronto",
+	  "Crazy Egg":"integration-crazy-egg",
+	  "Email Aptitude":"integration-email-aptitude",
+	  "Heap":"integration-heap",
+	  "SaaSquatch":"integration-saasquatch",
+	  "Lifecycle":"integration-lifecycle",
+	  "FullStory":"integration-fullstory",
+	  "Omniture":"integration-omniture",
+	  "Bing Ads":"integration-bing-ads",
+	  "Improvely":"integration-improvely",
+	  "Frontleaf":"integration-frontleaf",
+	  "Stitch":"integration-stitch",
+	  "Appboy":"integration-appboy",
+	  "Whale Watch":"integration-whale-watch",
+	  "Whale Alerts":"integration-whale-alerts",
+	  "Treasure Data":"integration-treasure-data",
+	  "Mailjet":"integration-mailjet",
+	  "HasOffers":"integration-hasoffers",
+	  "Crittercism":"integration-crittercism",
+	  "Apptimize":"integration-apptimize",
+	  "Autosend":"integration-autosend",
+	  "awe.sm":"integration-awe.sm",
+	  "Clicky":"integration-clicky",
+	  "Elevio":"integration-elevio",
+	  "Evergage":"integration-evergage",
+	  "Facebook Conversion Tracking":"integration-facebook-conversion-tracking",
+	  "FoxMetrics":"integration-foxmetrics",
+	  "Inspectlet":"integration-inspectlet",
+	  "Navilytics":"integration-navilytics",
+	  "Route":"integration-route",
+	  "SupportHero":"integration-supporthero",
+	  "TV Squared":"integration-tv-squared",
+	  "Userlike":"integration-userlike",
+	  "WebEngage":"integration-webengage",
+	  "Totango":"integration-totango",
+	  "Zendesk":"integration-zendesk",
+	  "Calq":"integration-calq",
+	  "Drip":"integration-drip",
+	  "Gainsight":"integration-gainsight",
+	  "Iron.io":"integration-iron.io",
+	  "Kenshoo":"integration-kenshoo",
+	  "Get Satisfaction":"integration-get-satisfaction",
+	  "Olark":"integration-olark",
+	  "SparkPost":"integration-sparkpost",
+	  "Salesmachine":"integration-salesmachine",
+	  "Machinify":"integration-machinify",
+	  "Keen IO":"integration-keen-io",
+	  "MailChimp":"integration-mailchimp",
+	  "Periscope.io":"integration-periscope.io",
+	  "Xplenty":"integration-xplenty",
+	  "Extole":"integration-extole",
+	  "Sendwithus":"integration-sendwithus",
+	  "Looker":"integration-looker",
+	  "Yellowhammer":"integration-yellowhammer",
+	  "Salesforce Marketing Cloud":"integration-salesforce-marketing-cloud",
+	  "Selligent":"integration-selligent",
+	  "Appcues":"integration-appcues",
+	  "Kilometer.io":"integration-kilometer.io",
+	  "HelloWorld":"integration-helloworld",
+	  "Ambassador":"integration-ambassador",
+	  "Lucky Orange":"integration-lucky-orange",
+	  "Parsely":"integration-parsely",
+	  "Cordial":"integration-cordial",
+	  "Google Analytics":"integration-google-analytics",
+	  "UserVoice":"integration-uservoice",
+	  "Tableau":"integration-tableau",
+	  "Zopim":"integration-zopim",
+	  "Freshdesk":"integration-freshdesk",
+	  "ClientSuccess":"integration-clientsuccess",
+	  "Convertro":"integration-convertro",
+	  "GoSquared":"integration-gosquared",
+	  "AdRoll":"integration-adroll",
+	  "Chango":"integration-chango",
+	  "Infinario":"integration-infinario",
+	  "Rubicon Project":"integration-rubicon-project",
+	  "Aboardly":"integration-aboardly",
+	  "Planhat":"integration-planhat",
+	  "Webtrends":"integration-webtrends",
+	  "MediaMath":"integration-mediamath",
+	  "Flurry":"integration-flurry",
+	  "MoEngage":"integration-moengage",
+	  "Tapstream":"integration-tapstream",
+	  "Bugsnag":"integration-bugsnag",
+	  "Localytics":"integration-localytics",
+	  "AdLearn Open Platform":"integration-adlearn-open-platform",
+	  "Adometry":"integration-adometry",
+	  "AdWords":"integration-google-adwords",
+	  "Alexa":"integration-alexa",
+	  "AppNexus":"integration-appnexus",
+	  "Atatus":"integration-atatus",
+	  "Blueshift":"integration-blueshift",
+	  "BugHerd":"integration-bugherd",
+	  "Curebit":"integration-curebit",
+	  "Eloqua":"integration-eloqua",
+	  "Errorception":"integration-errorception",
+	  "Gauges":"integration-gauges",
+	  "Google Tag Manager":"integration-google-tag-manager",
+	  "Hello Bar":"integration-hello-bar",
+	  "HitTail":"integration-hittail",
+	  "HubSpot":"integration-hubspot",
+	  "QuanticMind":"integration-quanticmind",
+	  "KISSmetrics":"integration-kissmetrics",
+	  "LiveChat":"integration-livechat",
+	  "Marketo":"integration-marketo",
+	  "Monetate":"integration-monetate",
+	  "MouseStats":"integration-mousestats",
+	  "Nudgespot":"integration-nudgespot",
+	  "Optimizely":"integration-optimizely",
+	  "Outbound":"integration-outbound",
+	  "Perfect Audience":"integration-perfect-audience",
+	  "Pingdom":"integration-pingdom",
+	  "Piwik":"integration-piwik",
+	  "Preact":"integration-preact",
+	  "Qualaroo":"integration-qualaroo",
+	  "Quantcast":"integration-quantcast",
+	  "Rocket Fuel":"integration-rocket-fuel",
+	  "ShareASale":"integration-shareasale",
+	  "SnapEngage":"integration-snapengage",
+	  "Spinnakr":"integration-spinnakr",
+	  "Steelhouse":"integration-steelhouse",
+	  "Taplytics":"integration-taplytics",
+	  "Track JS":"integration-track-js",
+	  "Twitter Ads":"integration-twitter-ads",
+	  "Vero":"integration-vero",
+	  "Visual Website Optimizer":"integration-visual-website-optimizer",
+	  "Woopra":"integration-woopra",
+	  "Yandex Metrica":"integration-yandex-metrica",
+	  "Ramen":"integration-ramen",
+	  "SimpleReach":"integration-simplereach",
+	  "DataXu":"integration-dataxu",
+	  "Millennial Media":"integration-millennial-media",
+	  "New Relic":"integration-new-relic",
+	  "Rockerbox":"integration-rockerbox",
+	  "Pardot":"integration-pardot",
+	  "Salesforce":"integration-salesforce",
+	  "Customer.io":"integration-customerio",
+	  "Help Scout":"integration-help-scout",
+	  "Intercom":"integration-intercom",
+	  "Iterable":"integration-iterable",
+	  "Librato":"integration-librato",
+	  "trak.io":"integration-trak.io",
+	  "Natero":"integration-natero",
+	  "Knowtify":"integration-knowtify",
+	  "Lytics":"integration-lytics",
+	  "ActiveCampaign":"integration-activecampaign",
+	  "Promoter.io":"integration-promoter.io",
+	  "Nanigans":"integration-nanigans",
+	  "All Aboard":"integration-all-aboard",
+	  "Mixpanel":"integration-mixpanel",
+	  "Amplitude":"integration-amplitude",
+	  "Sentry":"integration-sentry",
+	  "Boomtrain":"integration-boomtrain",
+	  "Interana":"integration-interana",
+	  "AutopilotHQ":"integration-autopilothq",
+	  "sendinblue":"integration-sendinblue",
+	  "Akita":"integration-akita",
+	  "Branch Metrics":"integration-branch-metrics",
+	  "BIME":"integration-bime",
+	  "StreetHawk":"integration-streethawk",
+	  "Amazon S3":"integration-amazon-s3",
+	  "Mouseflow":"integration-mouseflow",
+	  "Wigzo":"integration-wigzo",
+	  "Goedle":"integration-goedle",
+	  "Callexa":"integration-callexa",
+	  "Zenit":"integration-zenit",
+	  "Churnspotter":"integration-churnspotter",
+	  "Facebook Pixel":"integration-facebook-pixel",
+	  "Mojn":"integration-mojn",
+	  "EngagementLogic":"integration-engagement-logic",
+	  "Wootric":"integration-wootric",
+	  "Tractionboard":"integration-tractionboard",
+	  "MaestroIQ":"integration-maestroiq",
+	  "Castle":"integration-castle",
+	  "Threads":"integration-threads",
+	  "Kochava":"integration-kochava",
+	  "Pointillist":"integration-pointillist",
+	  "tray.io":"integration-tray.io",
+	  "Wagon":"integration-wagon",
+	  "Interstate Analytics":"integration-interstate-analytics",
+	  "Drift":"integration-drift",
+	  "Smyte":"integration-smyte",
+	  "Primer":"integration-primer",
+	  "Zaius":"integration-zaius",
+	  "Leanplum":"integration-leanplum",
+	  "SparkPage":"integration-sparkpage",
+	  "OneSignal":"integration-onesignal",
+	  "Chartbeat":"integration-chartbeat",
+	  "Relay":"integration-relay",
+	  "Watsi":"integration-watsi",
+	  "Adobe Marketing Cloud":"integration-adobe-marketing-cloud",
+	  "LeadBoxer":"integration-leadboxer",
+	  "Adjust":"integration-adjust",
+	  "Freshsales":"integration-freshsales",
+	  "Indicative":"integration-indicative",
+	  "Sherlock":"integration-sherlock",
+	  "Madkudu":"integration-madkudu",
+	  "CleverTap":"integration-clevertap",
+	  "Urban Airship":"integration-urban-airship",
+	  "Chameleon":"integration-chameleon",
+	  "Hull":"integration-hull",
+	  "Klaviyo":"integration-klaviyo",
+	  "Rollbar":"integration-rollbar",
+	  "comScore":"integration-comscore",
+	  "Facebook App Events":"integration-facebook-app-events",
+	  "SatisMeter":"integration-satismeter",
+	  "Webhooks":"integration-webhooks",
+	  "Bluecore":"integration-bluecore",
+	  "Pendo":"integration-pendo",
+	  "Wishpond":"integration-wishpond",
+	  "Intellimize":"integration-intellimize",
+	  "FullProfile":"integration-fullprofile",
+	  "Clearbit":"integration-clearbit",
+	  "Kahuna":"integration-kahuna",
+	  "Adobe Analytics":"integration-adobe-analytics",
+	  "Countly":"integration-countly",
+	  "Ask Nicely":"integration-ask-nicely",
+	  "Attune":"integration-attune",
+	  "Criteo":"integration-criteo",
+	  "Slack":"integration-slack",
+	  "TUNE":"integration-tune",
+	  "Firebase":"integration-firebase",
+	  "RadiumOne Connect":"integration-radiumone-connect",
+	  "AppsFlyer":"integration-appsflyer"
+	}
+	var randomProperty = function (obj) {
+	    var keys = Object.keys(obj)
+	    return obj[keys[ keys.length * Math.random() << 0]].slice(12);
+	};
 
 window.onload = function(){
 
@@ -33,14 +268,21 @@ window.onload = function(){
 		var center_y = H / 2 - drawing.height / 2;
 	    var x = center_x + radius * Math.cos(-angle*Math.PI/180) * distance;
 	    var y = center_y + radius * Math.sin(-angle*Math.PI/180) * distance;
-	    ctx.strokeStyle="#00386C";
-    	ctx.fillStyle="#00386C";
-	    ctx.beginPath();
-	    ctx.arc(x, y, point_size, 0, 2 * Math.PI);
-	    ctx.fill();
 
-	    ctx.font = font_size;
-	    ctx.fillText(label,x + 10,y);
+	    var icon = new Image();
+	    icon.src = "https://d3hotuclm6if1r.cloudfront.net/logos/"+label+"-default.svg"
+	    icon.onload= function(){
+    		ctx.drawImage(icon,x-10*icon.width/icon.height,y-13,20*icon.width/icon.height,20);
+	    };
+	    icon.onerror=function(){
+			ctx.strokeStyle="#00386C";
+		   	ctx.fillStyle="#00386C";
+		    ctx.beginPath();
+		    ctx.arc(x, y, point_size, 0, 2 * Math.PI);
+		    ctx.fill();
+		 	ctx.font = font_size;
+		    ctx.fillText(label,x + 10,y);
+	    }
 
 	    line=new Line(x,y,center_x,center_y);
     	line.drawWithArrowheads(ctx);
@@ -86,7 +328,6 @@ window.onload = function(){
         ctx.restore();
         ctx.fill();
     }
-
 	
 	function add_tech()
 	{
@@ -111,7 +352,14 @@ window.onload = function(){
 	var H = window.innerHeight;
 	canvas.width = W;
 	canvas.height = H;
-	var tech = ['Mixpanel','GA','','','','','',''];
+	var tech = [];
+	random_length = Math.floor(Math.random()*15);
+	for (i = 0; i < random_length; i++) { 
+    	new_tech = randomProperty(integrations);
+    	if (tech.indexOf(new_tech) == -1){
+    		tech.push(new_tech);
+    	}
+	}
 	ctx.fillStyle = "#FBFAF9";
 	ctx.fillRect(0, 0, W, H);
 	var drawing = new Image();
@@ -121,6 +369,7 @@ window.onload = function(){
         H / 2 - drawing.height / 2);
 	};
 	add_tech();
+
 }
 
   </script>
