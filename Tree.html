@@ -258,6 +258,7 @@ var integrations = {
 	    return obj[keys[ keys.length * Math.random() << 0]].slice(12);
 	};
 
+
 window.onload = function(){
 
 	function drawPoint(angle,distance,label){
@@ -268,9 +269,33 @@ window.onload = function(){
 		var center_y = H / 2 - drawing.height / 2;
 	    var x = center_x + radius * Math.cos(-angle*Math.PI/180) * distance;
 	    var y = center_y + radius * Math.sin(-angle*Math.PI/180) * distance;
-
 	    var icon = new Image();
-	    icon.src = "https://d3hotuclm6if1r.cloudfront.net/logos/"+label+"-default.svg"
+	    switch(label){
+	    	case "Warehouse":
+	    		icon.src = "https://static.segment.com/site-public/2.66.17-128-g0faa301/files/icon-small-warehouses-a8ce591913.svg";
+	    		line=new Line(x,y,center_x,center_y);
+	    		line.drawWithArrowheads(ctx);
+	    		break;
+	    	case "Mobile":
+	    		icon.src = "https://static.segment.com/site-public/2.66.17-128-g0faa301/files/icon-large-mobile-green-19f02e1de1.svg"
+	    		line=new Line(center_x,center_y,x,y);
+	    		line.drawWithArrowheads(ctx);
+	    		break
+	    	case "Web":
+	    		icon.src = "https://static.segment.com/site-public/2.66.17-128-g0faa301/files/icon-large-web-green-8aa0bad283.svg"
+	    		line=new Line(center_x,center_y,x,y);
+	    		line.drawWithArrowheads(ctx);
+	    		break
+	    	case "Server":
+	    		icon.src = "https://static.segment.com/site-public/2.66.17-128-g0faa301/files/icon-large-servers-green-7f60cbc9ea.svg"
+	    		line=new Line(center_x,center_y,x,y);
+	    		line.drawWithArrowheads(ctx);
+	    		break
+	    	default:
+	    		icon.src = "https://d3hotuclm6if1r.cloudfront.net/logos/"+label+"-default.svg"
+	    		line=new Line(x,y,center_x,center_y);
+	    		line.drawWithArrowheads(ctx);
+	    }
 	    icon.onload= function(){
     		ctx.drawImage(icon,x-10*icon.width/icon.height,y-13,20*icon.width/icon.height,20);
 	    };
@@ -283,15 +308,13 @@ window.onload = function(){
 		 	ctx.font = font_size;
 		    ctx.fillText(label,x + 10,y);
 	    }
-
-	    line=new Line(x,y,center_x,center_y);
-    	line.drawWithArrowheads(ctx);
     	ctx.beginPath();
 		ctx.arc(center_x, center_y, (drawing.height*Math.sqrt(2))/2, 0, 2 * Math.PI);
 		ctx.fillStyle="#FBFAF9";
 		ctx.fill();
 		ctx.strokeStyle="#FBFAF9";
 		ctx.stroke();
+
 	}
 	function Line(x1,y1,x2,y2){
             this.x1=x1;
@@ -344,6 +367,21 @@ window.onload = function(){
 		});
 
 	}
+	function add_sources()
+	{
+		ctx.strokeStyle="#00386C";
+    	ctx.fillStyle="#00386C";
+		var count = 1;
+		var theta = 180 / (sources.length+1);
+    	var angle = theta * count;
+		sources.forEach(function(entry) {
+    		console.log(entry);
+    		angle = theta * count
+    		drawPoint(180+angle,1,entry);
+    		count ++;
+		});
+
+	}
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
 	//Lets resize the canvas to occupy the full page
@@ -353,6 +391,7 @@ window.onload = function(){
 	canvas.width = W;
 	canvas.height = H;
 	var tech = [];
+	var sources = ["Web","Mobile","Server"];
 	random_length = Math.floor(Math.random()*15);
 	for (i = 0; i < random_length; i++) { 
     	new_tech = randomProperty(integrations);
@@ -368,8 +407,9 @@ window.onload = function(){
    		ctx.drawImage(drawing, W / 2 - drawing.width / 2,
         H / 2 - drawing.height / 2);
 	};
+	drawPoint(0,1,"Warehouse");
 	add_tech();
-
+	add_sources();
 }
 
   </script>
