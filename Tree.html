@@ -11,15 +11,43 @@
 #canvas {
   display: block;
 }
+#form{
+	box-sizing:border-box;
+	color:rgb(66, 94, 120);
+	display:block;
+	font-family:"Segment Circular Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:16px;
+	height:40px;
+	line-height:25px;
+	margin-top:0px;
+	text-align:left;
+	text-size-adjust:100%;
+	-webkit-font-smoothing:antialiased;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.container {
+    height: 50px;
+    position: relative 
+}
 
 </style>
 
 <body>
+<div class="container">
+<form id="form" class="InlineForm InlineForm--small" method="GET">
+              <div class="InlineForm-body">
+                <input id='site' class="InlineForm-input" name="website" type="text" required="" placeholder="www.segment.com">
+              </div>
+          </form>
+<div>
 	
 <canvas id="canvas"></canvas>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	
+</body>   
 
 <script type="text/javascript">
 var integrations = {
@@ -257,16 +285,23 @@ var integrations = {
 	    var keys = Object.keys(obj)
 	    return obj[keys[ keys.length * Math.random() << 0]].slice(12);
 	};
+	function httpGet(theUrl){
+	    var xmlHttp = new XMLHttpRequest();
+	    xmlHttp.open( "GET", theUrl, true ); // false for synchronous request
+	    xmlHttp.responseType = 'json'
+	    xmlHttp.send( );
+	    return xmlHttp.response;
+	}
 
 
 window.onload = function(){
 
 	function drawPoint(angle,distance,label){
-		var radius = H/2-80;
-		var point_size = 68;
+		var radius = H/3;
+		var point_size = radius/5;
 		var font_size = "20px";
-		var center_x = W / 2 - drawing.width / 2;
-		var center_y = H / 2 - drawing.height / 2;
+		var center_x = W / 2 - 87.5;
+		var center_y = H / 2 - 87.5;
 	    var x = center_x + radius * Math.cos(-angle*Math.PI/180) * distance;
 	    var y = center_y + radius * Math.sin(-angle*Math.PI/180) * distance;
 	    var icon = new Image();
@@ -307,11 +342,11 @@ window.onload = function(){
 	    	var iconHeight = icon.height;
 	    	maxdim = Math.sqrt(2*Math.pow(point_size,2));
 	    	console.log(maxdim)
-	    	if(iconWidth>iconHeight && iconWidth > maxdim){
+	    	if(iconWidth>iconHeight){
 	    		iconWidth = maxdim;
 	    		iconHeight = maxdim*icon.height/icon.width;
 	    	}
-	    	else if(iconWidth<=iconHeight && iconHeight > maxdim){
+	    	else if(iconWidth<=iconHeight){
 	    		iconHeight = maxdim;
 	    		iconWidth = maxdim*icon.width/icon.height;
 	    	}
@@ -374,21 +409,22 @@ window.onload = function(){
     	ctx.fillStyle="#00386C";
 		var count = 1;
 		var leftover = 0;
-		var theta = 180 / (Math.min(tech.length,4)+1);
-    	var angle = theta * count;
+		var max_count = Math.floor(H/200)
+		var theta = 180 / (Math.min(tech.length,max_count)+1);
+    	var angle = theta * (Math.min(tech.length,max_count)+1-count);
 		tech.forEach(function(entry) {
-			if (count >= 4){
+			if (count >= max_count){
 				leftover ++;
 			}
 			else{
 	    		console.log(entry);
-	    		angle = theta * count
+	    		angle = theta * (Math.min(tech.length,max_count)+1-count)
 	    		drawPoint(angle,1,entry);
 	    		count ++;
     		}
 		});
 		if (tech.length-count > 0){
-			angle = theta * count
+			angle = theta
     		drawPoint(angle,1,"and "+leftover+" more");
     	}
 
@@ -408,6 +444,16 @@ window.onload = function(){
 		});
 
 	}
+	function add_logo()
+	{
+		drawing.src = "Segment_icon.png";
+		drawing.onload = function() {
+	   		ctx.drawImage(drawing, W / 2 - 175,
+	        H / 2 - 175,175,175);
+		};
+		drawPoint(0,1,"Warehouse");
+	}
+	
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
 	//Lets resize the canvas to occupy the full page
@@ -416,8 +462,12 @@ window.onload = function(){
 	var H = window.innerHeight;
 	canvas.width = W;
 	canvas.height = H;
+	var drawing = new Image();
+	ctx.fillStyle = "#FBFAF9";
+	ctx.fillRect(0, 0, W, H);
 	var tech = [];
 	var sources = ["Web","Mobile","Server"];
+	//console.log(httpGet("https://segment-tree-generator.herokuapp.com/api/integrations/nike.com"))
 	random_length = Math.floor(Math.random()*15);
 	for (i = 0; i < random_length; i++) { 
     	new_tech = randomProperty(integrations);
@@ -425,19 +475,20 @@ window.onload = function(){
     		tech.push(new_tech);
     	}
 	}
-	ctx.fillStyle = "#FBFAF9";
-	ctx.fillRect(0, 0, W, H);
-	var drawing = new Image();
-	drawing.src = "Segment_icon.png";
-	drawing.onload = function() {
-   		ctx.drawImage(drawing, W / 2 - drawing.width / 2,
-        H / 2 - drawing.height / 2);
-	};
-	drawPoint(0,1,"Warehouse");
-	add_tech();
-	add_sources();
+	var inputBox = document.getElementById('site');
+
+	inputBox.onkeyup = function(){
+	    //httpGet(inputBox.value);
+	    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	    ctx.fillStyle = "#FBFAF9";
+		ctx.fillRect(0, 0, W, H);
+	    add_logo();
+	    add_tech();
+	    add_sources();
+	}
+
 }
 
   </script>
 	
-</body>      
+   
